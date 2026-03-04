@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI All — Руководство по искусственному интеллекту</title>
+  <meta name="description"
+    content="Полное руководство по применению ИИ в различных отраслях: готовые практики, инструменты и модели для медицины, бизнеса, образования, финансов и многого другого." />
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#6c63ff" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="AI All" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ===== BACKGROUND PARTICLES ===== -->
+  <div class="bg-particles" id="bgParticles"></div>
+  <div class="bg-grid"></div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a class="logo" href="#home">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">AI <span class="logo-accent">All</span></span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a class="nav-link" href="#home">Главная</a>
+        <a class="nav-link" href="#industries">Отрасли</a>
+        <a class="nav-link" href="#models">Модели</a>
+        <a class="nav-link" href="#practices">Практика</a>
+        <a class="nav-link" href="#about">О проекте</a>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-badge fadeInUp">🤖 Полное руководство по ИИ</div>
+      <h1 class="hero-title fadeInUp">
+        Искусственный<br />
+        <span class="gradient-text">Интеллект</span><br />
+        для каждой отрасли
+      </h1>
+      <p class="hero-desc fadeInUp">
+        Готовые практики, топовые модели и инструменты ИИ для медицины, бизнеса,
+        образования, финансов, права, творчества и многого другого.
+      </p>
+      <div class="hero-actions fadeInUp">
+        <a href="#industries" class="btn btn-primary">Выбрать отрасль</a>
+        <a href="#models" class="btn btn-ghost">Смотреть модели</a>
+      </div>
+      <div class="hero-stats fadeInUp">
+        <div class="stat"><span class="stat-num" data-target="12">0</span><span class="stat-label">Отраслей</span></div>
+        <div class="stat"><span class="stat-num" data-target="80">0</span><span
+            class="stat-label">ИИ-инструментов</span></div>
+        <div class="stat"><span class="stat-num" data-target="150">0</span><span class="stat-label">Практик</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="brain-ring ring-1"></div>
+      <div class="brain-ring ring-2"></div>
+      <div class="brain-ring ring-3"></div>
+      <div class="center-icon">🧠</div>
+    </div>
+  </section>
+
+  <!-- ===== INDUSTRIES ===== -->
+  <section class="section" id="industries">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">отрасли</div>
+        <h2 class="section-title">Выберите <span class="gradient-text">отрасль</span></h2>
+        <p class="section-desc">Нажмите на карточку, чтобы увидеть инструменты, модели и практики</p>
+      </div>
+      <div class="industry-grid" id="industryGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== INDUSTRY DETAIL PANEL ===== -->
+  <div class="detail-overlay" id="detailOverlay"></div>
+  <div class="detail-panel" id="detailPanel">
+    <button class="detail-close" id="detailClose">✕</button>
+    <div class="detail-content" id="detailContent"></div>
+  </div>
+
+  <!-- ===== TOP AI MODELS ===== -->
+  <section class="section section-dark" id="models">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">модели ии</div>
+        <h2 class="section-title">Топовые <span class="gradient-text">модели</span></h2>
+        <p class="section-desc">Самые мощные и популярные ИИ-модели 2024–2025</p>
+      </div>
+      <div class="filter-bar" id="modelFilter">
+        <button class="filter-btn active" data-filter="all">Все</button>
+        <button class="filter-btn" data-filter="text">Текст</button>
+        <button class="filter-btn" data-filter="image">Изображения</button>
+        <button class="filter-btn" data-filter="code">Код</button>
+        <button class="filter-btn" data-filter="audio">Аудио</button>
+        <button class="filter-btn" data-filter="video">Видео</button>
+        <button class="filter-btn" data-filter="multimodal">Мультимодальные</button>
+      </div>
+      <div class="models-grid" id="modelsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== PRACTICES ===== -->
+  <section class="section" id="practices">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">практика</div>
+        <h2 class="section-title">Готовые <span class="gradient-text">практики</span></h2>
+        <p class="section-desc">Реальные промпты, сценарии и рабочие процессы с ИИ</p>
+      </div>
+      <div class="practices-tabs" id="practicesTabs"></div>
+      <div class="practices-content" id="practicesContent"></div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="section section-dark" id="about">
+    <div class="container about-container">
+      <div class="about-text">
+        <div class="section-tag">о проекте</div>
+        <h2 class="section-title">Зачем нужен <span class="gradient-text">AI All?</span></h2>
+        <p>AI All — это живая энциклопедия искусственного интеллекта для практиков. Здесь нет теоретических лекций —
+          только конкретные инструменты, модели и сценарии применения, которые работают уже сейчас.</p>
+        <ul class="about-list">
+          <li>✅ Актуальные модели и инструменты 2024–2025</li>
+          <li>✅ Готовые промпты для каждой задачи</li>
+          <li>✅ Примеры автоматизации рабочих процессов</li>
+          <li>✅ Сравнение инструментов по отраслям</li>
+          <li>✅ Бесплатно и без регистрации</li>
+        </ul>
+      </div>
+      <div class="about-cards">
+        <div class="about-card">
+          <div class="about-card-icon">🎯</div>
+          <div class="about-card-title">Практично</div>
+          <div class="about-card-desc">Только рабочие сценарии без воды</div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">⚡</div>
+          <div class="about-card-title">Актуально</div>
+          <div class="about-card-desc">Обновляется вместе с рынком ИИ</div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">🌐</div>
+          <div class="about-card-title">Универсально</div>
+          <div class="about-card-desc">12 отраслей в одном месте</div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">🔓</div>
+          <div class="about-card-title">Открыто</div>
+          <div class="about-card-desc">Бесплатный доступ ко всем материалам</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="logo">
+          <span class="logo-icon">⬡</span>
+          <span class="logo-text">AI <span class="logo-accent">All</span></span>
+        </div>
+        <p class="footer-copy">© 2025 AI All — Руководство по искусственному интеллекту</p>
+        <p class="footer-sub">made by Eldar Gaifulin</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+
+  <!-- PWA Install Prompt -->
+  <div id="pwaPrompt" style="display:none; position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:999;
+    background:rgba(12,18,40,0.95); border:1px solid rgba(108,99,255,0.5); border-radius:16px;
+    padding:16px 24px; display:none; align-items:center; gap:16px;
+    box-shadow:0 8px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(108,99,255,0.3);
+    backdrop-filter:blur(20px); font-family:'Inter',sans-serif; color:#e8eaf6;
+    white-space:nowrap; animation: slideUp 0.4s ease;">
+    <span style="font-size:1.8rem">⬡</span>
+    <div>
+      <div style="font-weight:700; font-size:0.95rem">Установить AI All</div>
+      <div style="font-size:0.8rem; color:#8e9cc0">Добавить на рабочий стол</div>
+    </div>
+    <button id="pwaInstallBtn" style="background:linear-gradient(135deg,#6c63ff,#22d3ee); border:none;
+      color:#fff; padding:10px 20px; border-radius:10px; font-weight:600; font-size:0.88rem;
+      cursor:pointer; transition:0.2s">Установить</button>
+    <button id="pwaDismiss" style="background:none; border:none; color:#5a6990; font-size:1.2rem;
+      cursor:pointer; padding:4px">✕</button>
+  </div>
+
+  <style>
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+  </style>
+
+  <script>
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('✅ SW registered:', reg.scope))
+          .catch(err => console.warn('SW error:', err));
+      });
+    }
+
+    // PWA Install Prompt
+    let deferredPrompt;
+    const pwaPrompt = document.getElementById('pwaPrompt');
+    const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+    const pwaDismiss = document.getElementById('pwaDismiss');
+
+    window.addEventListener('beforeinstallprompt', e => {
+      e.preventDefault();
+      deferredPrompt = e;
+      setTimeout(() => { pwaPrompt.style.display = 'flex'; }, 3000);
+    });
+
+    pwaInstallBtn.addEventListener('click', async () => {
+      pwaPrompt.style.display = 'none';
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log('PWA install:', outcome);
+      deferredPrompt = null;
+    });
+
+    pwaDismiss.addEventListener('click', () => { pwaPrompt.style.display = 'none'; });
+
+    // Already installed
+    window.addEventListener('appinstalled', () => {
+      pwaPrompt.style.display = 'none';
+      console.log('✅ PWA installed!');
+    });
+  </script>
+</body>
+
+</html>

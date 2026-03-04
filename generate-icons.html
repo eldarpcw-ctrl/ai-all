@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Generate PWA Icons</title>
+</head>
+
+<body>
+    <h2>Генерация иконок AI All PWA</h2>
+    <p>Иконки генерируются и скачиваются автоматически...</p>
+    <div id="status"></div>
+    <canvas id="c" style="display:none"></canvas>
+    <script>
+        const SIZES = [72, 96, 128, 144, 152, 192, 384, 512];
+        const canvas = document.getElementById('c');
+        const ctx = canvas.getContext('2d');
+        const status = document.getElementById('status');
+        let done = 0;
+
+        async function drawIcon(size) {
+            canvas.width = canvas.height = size;
+            const cx = size / 2, cy = size / 2;
+
+            // Background gradient
+            const bg = ctx.createRadialGradient(cx, cy * 0.6, 0, cx, cy, size * 0.7);
+            bg.addColorStop(0, '#0c1228');
+            bg.addColorStop(1, '#050810');
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, size, size);
+
+            // Outer ring glow
+            ctx.save();
+            ctx.shadowBlur = size * 0.1;
+            ctx.shadowColor = '#6c63ff88';
+            ctx.beginPath();
+            const hr = size * 0.38;
+            for (let i = 0; i < 6; i++) {
+                const angle = (Math.PI / 3) * i - Math.PI / 6;
+                const x = cx + hr * Math.cos(angle);
+                const y = cy + hr * Math.sin(angle);
+                i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            const hexG = ctx.createLinearGradient(cx - hr, cy - hr, cx + hr, cy + hr);
+            hexG.addColorStop(0, '#6c63ff');
+            hexG.addColorStop(1, '#22d3ee');
+            ctx.strokeStyle = hexG;
+            ctx.lineWidth = Math.max(size * 0.045, 2);
+            ctx.stroke();
+            ctx.restore();
+
+            // Inner glow
+            const glowR = size * 0.25;
+            const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, glowR);
+            glow.addColorStop(0, 'rgba(108,99,255,0.45)');
+            glow.addColorStop(0.5, 'rgba(34,211,238,0.15)');
+            glow.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(cx, cy, glowR, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Brain emoji
+            const emojiSize = Math.max(Math.floor(size * 0.33), 12);
+            ctx.font = `${emojiSize}px serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🧠', cx, cy - size * 0.05);
+
+            // "AI ALL" label
+            if (size >= 96) {
+                const fs = Math.max(Math.floor(size * 0.13), 8);
+                ctx.font = `900 ${fs}px Arial, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'alphabetic';
+                const tg = ctx.createLinearGradient(cx - size * 0.2, 0, cx + size * 0.2, 0);
+                tg.addColorStop(0, '#a78bfa');
+                tg.addColorStop(1, '#22d3ee');
+                ctx.fillStyle = tg;
+                ctx.fillText('AI ALL', cx, size - size * 0.1);
+            }
+        }
+
+        async function generateAll() {
+            for (const size of SIZES) {
+                await drawIcon(size);
+                await new Promise(resolve => {
+                    canvas.toBlob(blob => {
+                        const a = document.createElement('a');
+                        a.download = `icon-${size}.png`;
+                        a.href = URL.createObjectURL(blob);
+                        a.click();
+                        URL.revokeObjectURL(a.href);
+                        done++;
+                        status.innerHTML += `<div style="color:lime">✅ icon-${size}.png скачан</div>`;
+                        setTimeout(resolve, 400);
+                    }, 'image/png');
+                });
+            }
+            status.innerHTML += `<br><strong style="color:#a78bfa">🎉 Все иконки скачаны! Переместите их в папку ai-all/icons/</strong>`;
+        }
+
+        generateAll();
+    </script>
+</body>
+
+</html>
