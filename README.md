@@ -1,6 +1,6 @@
 # AI All — Руководство по искусственному интеллекту
 
-🌐 **Live Demo:** [https://eldargaifulin.github.io/ai-all](https://eldargaifulin.github.io/ai-all)
+🌐 **Live Demo:** [https://eldarpcw-ctrl.github.io/ai-all](https://eldarpcw-ctrl.github.io/ai-all)
 
 > Полное практическое руководство по применению ИИ в 12 отраслях — с готовыми промптами, топовыми моделями и рабочими сценариями.
 
